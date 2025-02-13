@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #1c2e4a; }
+        .container { max-width: 600px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        .buttons { margin-top: 20px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; border: none; border-radius: 5px; background: #ff4081; color: white; font-size: 16px; display: inline-block; }
+        button:hover { background: #e91e63; }
+        #apology-text { font-size: 18px; white-space: pre-line; text-align: left; margin-top: 20px; min-height: 150px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bg-music" autoplay loop>
+        <source src="https://drive.google.com/uc?export=download&id=12OfXOxt38DynIl6cE2b3miTLKi0x_fAV" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <div class="container">
+        <h2>I'm Sorry 💔</h2>
+        <p id="apology-text">Hey pookie pie atty baby, how are you?</p>
+        <div class="buttons">
+            <button id="prev-btn" onclick="prevPage()" style="display: none;">⬅ Previous</button>
+            <button id="next-btn" onclick="nextPage()">Next ➡</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = [
+            "Hey sweetie pie, how are you?",
+            "I know I’ve hurt you, and I want to make things right. Please let me explain...",
+            "Sometimes, I say things without realizing how they affect you, and I truly regret that.",
+            "I’ve been clueless at times, not understanding your feelings the way I should have.",
+            "I never meant to make you feel unimportant. You mean the world to me.",
+            "I want to learn and grow so I can be better for you, because you deserve the best.",
+            "I hate that I made you feel like this. I never wanted to add to your pain.",
+            "I know you feel like no one understands you, but I want to try harder to be that person for you.",
+            "You don’t have to wear a mask with me. I care about the real you, even when you’re hurting.",
+            "No matter what, I want you to know you are valued, loved, and deserve happiness.",
+            "My lil’ starlight, my sleepyhead, my chaos goblin 💖. Spending time with you—whether it’s texting for hours, binge-watching our fav movies together, or absolutely destroying each other in games—is literally my favorite thing ever. You make every convo fun, even when we're just talking about the most random nonsense. You’re my comfort person, the one I’d choose over and over again. Even from miles away, you make me feel close, like home. I love the way you exist, the way you laugh at my dumb jokes, and the way you somehow understand me even when I don’t make sense. You’re stuck with me forever, sorry not sorry. 🫶💖"
+        ];
+
+        let currentPage = 0;
+        const apologyText = document.getElementById("apology-text");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        function typeWriterEffect(text, i = 0) {
+            if (i === 0) {
+                apologyText.innerHTML = "";
+                nextBtn.style.display = "none";
+                prevBtn.style.display = "none";
+            }
+            if (i < text.length) {
+                apologyText.innerHTML += text.charAt(i);
+                setTimeout(() => typeWriterEffect(text, i + 1), 30);
+            } else {
+                nextBtn.style.display = "inline-block";
+                if (currentPage > 0) prevBtn.style.display = "inline-block";
+            }
+        }
+
+        function loadPage() {
+            if (currentPage === 0) {
+                apologyText.innerHTML = pages[currentPage];
+                nextBtn.style.display = "inline-block";
+                prevBtn.style.display = "none";
+            } else {
+                typeWriterEffect(pages[currentPage]);
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                loadPage();
+            }
+        }
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                loadPage();
+            }
+        }
+
+        window.onload = loadPage;
+    </script>
+</body>
+</html>
